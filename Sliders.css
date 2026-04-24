@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+#sli {
+	width: 95%;
+	margin: 0rem;
+	padding: 0rem;
+	overflow: hidden;
+}
+
+#sli ul {
+	display: flex;
+	margin: 0rem;
+	padding: 0rem;
+	width: 400%;
+	
+	animation: cambio 15s infinite alternate linear;
+}
+
+#sli li {
+	width: 25%;
+	margin: 0rem;
+	padding: 0rem;
+	list-style: none;
+	
+}
+
+#sli img {
+	width: 100%;
+	margin: 0rem;
+	padding: 0rem;
+
+}
+	
+#sli2 {
+	width: 95%;
+	margin: 0rem;
+	padding: 0rem;
+	overflow: hidden;
+}
+
+#sli2 ul {
+	display: flex;
+	margin: 0rem;
+	padding: 0rem;
+	width: 400%;
+	
+	animation: cambio 15s infinite alternate linear;
+}
+
+#sli2 li {
+	width: 25%;
+	margin: 0rem;
+	padding: 0rem;
+	list-style:none;
+}
+
+#sli2 img {
+	width: 100%;
+	margin: 0rem;
+	padding: 0rem;
+}
+	
+#sli3 {
+	width: 95%;
+	margin: 0rem;
+	padding: 0rem;
+	overflow: hidden;
+}
+
+#sli3 ul {
+	display: flex;
+	margin: 0rem;
+	padding: 0rem;
+	width: 400%;
+	
+	animation: cambio 15s infinite alternate linear;
+}
+
+#sli3 li {
+	width: 25%;
+	margin: 0rem;
+	padding: 0rem;
+	list-style: none;
+
+}
+
+#sli3 img {
+	width: 100%;
+	margin: 0rem;
+	padding: 0rem;
+
+}
+	
+@keyframes cambio {
+	0% {margin-left: 0;}
+	30% {margin-left: 0;}
+	
+	35% {margin-left: -100%;}
+	65% {margin-left: -100%;}
+	
+	70% {margin-left: -200%;}
+	100% {margin-left: -200%;}
+}
