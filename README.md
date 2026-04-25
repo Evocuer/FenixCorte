@@ -1,6 +1,6 @@
 # 🔥 Fenix Corte Acero
 
-Official website for **Fenix Corte Acero**, a Medellín-based company specializing in laser cutting of stainless steel, cold-rolled sheet metal, and other iron alloys for personal, advertising, and industrial use.
+Official website for **Fenix Corte Acero**, a Medellín-based company specializing in laser cutting of stainless steel, cold-rolled sheet metal, and other iron alloys for personal, advertising, and industrial projects.
 
 🌐 **Live site:** [evocuer.github.io/FenixCorte](https://evocuer.github.io/FenixCorte)
 
@@ -8,16 +8,16 @@ Official website for **Fenix Corte Acero**, a Medellín-based company specializi
 
 ## 📋 Pages
 
-| Page | Description |
-|---|---|
-| `Index.html` | Home page with service overview |
-| `Servicios.html` | Services — laser cutting & surface treatments |
-| `Corte.html` | Laser cutting detail page |
-| `Trat.html` | Surface treatments detail page |
-| `Materiales.html` | Materials — stainless steel & cold-rolled sheet |
-| `Trabajos.html` | Gallery of completed work |
-| `Nosotros.html` | About us — mission & vision |
-| `Contacto.html` | Contact form with Google Maps |
+| Page | File | Description |
+|---|---|---|
+| Home | `index.html` | Home page with service overview |
+| Services | `servicios.html` | Services — laser cutting & surface treatments |
+| Laser Cutting | `corte.html` | Laser cutting detail page |
+| Surface Treatments | `trat.html` | Surface treatments detail page |
+| Materials | `materiales.html` | Materials — stainless steel & cold-rolled sheet |
+| Portfolio | `trabajos.html` | Gallery of completed work |
+| About Us | `nosotros.html` | About us — mission & vision |
+| Contact | `contacto.html` | Contact form with Google Maps |
 
 ---
 
@@ -35,20 +35,18 @@ Official website for **Fenix Corte Acero**, a Medellín-based company specializi
 
 ```
 FenixCorte/
-├── Index.html
-├── Contacto.html
-├── Servicios.html
-├── Materiales.html
-├── Trabajos.html
-├── Nosotros.html
-├── Corte.html
-├── Trat.html
-├── FCA1.css
-├── Sliders.css
-├── index.html              ← redirect to Index.html
-├── .nojekyll               ← disables Jekyll on GitHub Pages
-└── Fenix Corte Acero/
-    └── Imagenes/           ← all site images live here
+├── index.html                    ← landing page redirect
+├── servicios.html                ← services page
+├── corte.html                    ← laser cutting details
+├── trat.html                     ← surface treatments details
+├── materiales.html               ← materials info
+├── trabajos.html                 ← portfolio/gallery
+├── nosotros.html                 ← about company
+├── contacto.html                 ← contact form
+├── fca1.css                      ← main stylesheet
+├── sliders.css                   ← slider components
+├── README.md
+└── Imagenes/                     ← image assets
 ```
 
 ---
@@ -63,7 +61,7 @@ The contact form uses [EmailJS](https://www.emailjs.com) to send emails directly
 - **Rate limiting** — max 3 messages per hour per browser session
 
 ### Configuration
-To update EmailJS credentials, edit the following variables in `Contacto.html`:
+To update EmailJS credentials, edit the following variables in `contacto.html`:
 
 ```javascript
 var EMAILJS_PUBLIC_KEY  = "your_public_key";
