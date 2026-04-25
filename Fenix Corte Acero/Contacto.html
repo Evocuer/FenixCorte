@@ -1,26 +1,99 @@
 <!doctype html>
-<html  id="con" lang="es">
+<html id="con" lang="es">
 <head>
-	
-	<meta charset="utf-8">
-	<meta name="author" content="Evocuer">
-	
-	<meta name="description" content="Corte de acero inoxidable y lamina CR hasta calibre 16 con tecnologia laser en Medellin, Antioquia, Corte laser">
-	<meta name="Keywords" content="Corte Laser, Corte Acero, Corta Laser, Acero inoxidable, Lamina CR, Lamina Cold Rolled, Lamina col rol, Acero inox, inox, Corte Acero, Corta Acero, Laser medellin, Corte laser medellin, maquina laser, col rol, HR, CR, inox medellin, acinox, maquinas laser, corte laser maquina, maquina acero">
-	<meta name="robots" content="All">
-	<meta name="revisit-after" content="7 days">
-	<meta name="viewport" content="width=device=width, initial-scale=1.0 maximum-scale=1.0">
-	
-	  	  
-	<title>Fenix Corte Acero - Contacto</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Evocuer">
+  <meta name="description" content="Corte de acero inoxidable y lamina CR hasta calibre 16 con tecnologia laser en Medellin, Antioquia, Corte laser">
+  <meta name="Keywords" content="Corte Laser, Corte Acero, Acero inoxidable, Lamina CR, Corte laser medellin">
+  <meta name="robots" content="All">
+  <meta name="revisit-after" content="7 days">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fenix Corte Acero - Contacto</title>
+  <link href="FCA1.css" rel="stylesheet" type="text/css">
+  <link href="Sliders.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+  <link rel="icon" href="Imagenes/Icon_log.png">
 
-	
-	<link href="FCA1.css" rel="stylesheet" type="text/css">
-	<link href="Sliders.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-	
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+    /* === FORMULARIO DE CONTACTO === */
+    #contacto-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 30px 40px;
+    }
+    .contacto-info { flex: 1; min-width: 220px; }
+    .contacto-form { flex: 1; min-width: 260px; }
+
+    .contacto-info h1 { margin-bottom: 14px; }
+    .contacto-info p  { margin-bottom: 12px; }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .info-item i { color: #c0392b; margin-top: 3px; width: 16px; }
+
+    .social-links { display: flex; gap: 12px; margin-top: 16px; }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #333; display: flex; align-items: center;
+      justify-content: center; color: #ccc; text-decoration: none;
+      font-size: 15px; transition: all 0.2s;
+    }
+    .social-links a:hover { background: #c0392b; color: #fff; }
+
+    /* Form fields */
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block; font-size: 12px; margin-bottom: 5px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; padding: 10px 12px;
+      background: #2a2a2a; border: 1px solid #444;
+      border-radius: 4px; color: #eee; font-size: 14px;
+      outline: none; transition: border-color 0.2s;
+      font-family: Arial, sans-serif;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: #c0392b; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    #cenv-new {
+      width: 100%; padding: 12px;
+      background: #c0392b; color: #fff;
+      border: none; border-radius: 4px;
+      font-size: 15px; font-weight: bold;
+      cursor: pointer; letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    #cenv-new:hover { background: #e74c3c; }
+    #cenv-new:disabled { background: #555; cursor: not-allowed; }
+
+    .msg-success {
+      display: none; background: #1e4d2b;
+      border: 1px solid #2ecc71; color: #2ecc71;
+      padding: 12px; border-radius: 4px;
+      text-align: center; margin-top: 12px; font-size: 14px;
+    }
+    .msg-error {
+      display: none; background: #4d1e1e;
+      border: 1px solid #e74c3c; color: #e74c3c;
+      padding: 12px; border-radius: 4px;
+      text-align: center; margin-top: 12px; font-size: 14px;
+    }
+  </style>
 </head>
 <body>
+
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -28,107 +101,204 @@
   js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.1';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-	<header>
-		<div id="head" class="groupA">
-			<img src="Imagenes/LogoH.png" alt="Logo Head" class="logh">
-		</div>
-	
-		<nav id="enlaceA" class="groupA">
-			<div class="nave">
-				<a id="co" href="Contacto.html">Contacto</a>
-				<a id="no" href="Nosotros.html">Quienes somos</a>
-				<div id="se" class="sub">
-					<p class="subbtn">Portafolio <i class="fa fa-caret-down"></i></p>
-					<div class="submen">
-						<a href="Servicios.html">Servicios</a>
-						<a href="Materiales.html">Materiales</a>
-						<a href="Trabajos.html">Trabajos</a>
-					</div>
-				</div>
-				<a id="in" href="Index.html">Inicio</a>
-			</div>
-		</nav>
-	
-	</header>	
-	<article class="groupA">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2091462825924!2d-75.600568685445!3d6.236139995485925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e44292ca7c6626d%3A0x3b1bd73ec9d27eb2!2sFenix+Corte+Aceros!5e0!3m2!1ses-419!2sco!4v1535035569463" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-		<br>
-		<br>
-		<div id="cuerpo" class="c2c">	
-			<div class="col1">
-				<h1 class="indtxt">COMUNIQUESE CON NOSOTROS</h1>
-				<br>
-				<br>
-				<p class="indtxt2">Gracias por visitar nuestro sitio web, permitanos atenderlo y brindarle nuestro mejor servicio.</p>
-				<br>
-				<p class="indtxt2">No olvide diligenciar los campos con la informacion requerida a fin de brindarle una respuesta oportuna.</p>
-				<br>
-				<ul>
-					<il><h1 class="indtxt2">Calle 32C # 78 - 04, Belen Miravalle</h1></il>
-					<br>
-					<il><h1 class="indtxt2">(4) 387 73 10 / 311 532 01 89</h1></il>
-					<br>
-					<il><h1 class="indtxt2">Medellin - Antioquia, Colombia</h1></il>
-					<br>
-					<il><h1 class="indtxt2">Fenixcorte@gmail.com</h1></il>
-				</ul>
-				<br>
-				<div id="sm">
-					<ul>
-						<il><a href="https://www.facebook.com/fenix.corteacero.5"><img src="Imagenes/icon_fb.png" alt="FB icon"></a></il>
-						<il><a href="https://www.instagram.com/fenixcorte/"><img src="Imagenes/icon_ig.png" alt="IG icon"></a></il>
-						<il><a href=""><img src="Imagenes/icon_tw.png" alt="TW icon"></a></il>
-					</ul>
-				</div>
-			</div>
-			<div class="col1">
-				<form action="email.php" method="post">
-				<label class="indtxt2">Direccion e-mail*</label><input type="email" id="ccorreo" name="Correo">
-				<label class="indtxt2">Numero de contacto</label><input type="text" id="ctel" name="Telefono">
-				<label class="indtxt2">Mensaje</label><textarea rows="5" id="Cmen" name="Mensaje"></textarea>
-				<input type="submit" id="cenv" name="enviar" value="Enviar"><a href="email.php"></a>
-				</form>
-			</div>
-		</div>
-	</article>
-	<footer>
-		<nav id="pie" class="groupA">
-			<img src="Imagenes/LogoF.png" alt="Logo Foot" class="logf">
-			<ul id="dire">
-					<il>
-						<img src="Imagenes/icon_dir.png" alt="icon direccion" class="icon">&nbsp; Calle 32C # 78 - 04, Belen Miravalle
-					</il>
-				<br>
-					<il>
-						<img src="Imagenes/icon_tel.png" alt="icon telefono" class="icon">&nbsp; &#40;4&#41; 3877310 / 311 532 0189
-					</il>
-				<br>
-					<il>
-						<img src="Imagenes/icon_mail.png" alt="icon mail" class="icon">&nbsp; Fenixcorte@gmail.com
-					</il>	
-				</ul>
-			<ul id="enlaceB">
-					<il><a href="Index.html">Inicio</a></il>
-					<il><a href="Servicios.html">Servicios</a></il>
-					<il><a href="#nosotros">Quienes Somos</a></il>
-					<il><a href="Contacto.html">Contacto</a></il>
-			</ul>
-		</nav>
-		<div id="base" class="groupA">
-			<div class="FB">
-				<div class="fb-like" data-href="https://www.facebook.com/Fenixcortemedellin" data-layout="standard" data-action="like" data-colorscheme="dark" data-size="large" data-show-faces="true" data-share="false" data-width="320"></div>
-			</div>
-			<div class="FB">
-				<a href="https://twitter.com/AceroCorte?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-lang="es" data-dnt="true" data-show-count="false">Follow Fenix corte acero</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-			</div>
-		    <p id="derechos">
-				Todos los derechos reservados © Fenix Corte Acero
-			</p>
-		 	<p class="cr">
-				<img src="Imagenes/Copyr.png" alt="Desing Cuervo">
-			</p>
-			
-	  </div>
-	</footer>
+
+<header>
+  <a href="Index.html">
+    <div id="head" class="groupA">
+      <img src="Imagenes/LogoH.png" alt="Logo Head" class="logh">
+    </div>
+  </a>
+  <nav id="enlaceA" class="groupA">
+    <div class="nave">
+      <a id="co" href="Contacto.html">Contacto</a>
+      <a id="no" href="Nosotros.html">Quienes somos</a>
+      <div id="se" class="sub">
+        <p class="subbtn">Portafolio <i class="fa fa-caret-down"></i></p>
+        <div class="submen">
+          <a href="Servicios.html">Servicios</a>
+          <a href="Materiales.html">Materiales</a>
+          <a href="Trabajos.html">Trabajos</a>
+        </div>
+      </div>
+      <a id="in" href="Index.html">Inicio</a>
+    </div>
+  </nav>
+</header>
+
+<article class="groupA">
+  <!-- Mapa Google Maps -->
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2091462825924!2d-75.600568685445!3d6.236139995485925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e44292ca7c6626d%3A0x3b1bd73ec9d27eb2!2sFenix+Corte+Aceros!5e0!3m2!1ses-419!2sco!4v1535035569463"
+    width="100%" height="400" frameborder="0" style="border:0" allowfullscreen>
+  </iframe>
+
+  <br><br>
+
+  <div id="contacto-wrapper">
+
+    <!-- Informacion de contacto -->
+    <div class="contacto-info">
+      <h1 class="indtxt">COMUNÍQUESE CON NOSOTROS</h1>
+      <br>
+      <p class="indtxt2">Gracias por visitar nuestro sitio web, permítanos atenderlo y brindarle nuestro mejor servicio.</p>
+      <p class="indtxt2">No olvide diligenciar los campos con la información requerida a fin de brindarle una respuesta oportuna.</p>
+      <br>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span class="indtxt2">Calle 32C # 78 - 04, Belén Miravalle</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <span class="indtxt2">(4) 387 73 10 / 311 532 01 89</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-city"></i>
+        <span class="indtxt2">Medellín - Antioquia, Colombia</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <span class="indtxt2">Fenixcorte@gmail.com</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/fenix.corteacero.5" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/fenixcorte/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/AceroCorte" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Formulario de contacto con EmailJS -->
+    <div class="contacto-form">
+      <div class="form-group">
+        <label class="indtxt2">Dirección e-mail *</label>
+        <input type="email" id="ccorreo" placeholder="tucorreo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label class="indtxt2">Número de contacto</label>
+        <input type="text" id="ctel" placeholder="311 532 0189">
+      </div>
+      <div class="form-group">
+        <label class="indtxt2">Mensaje *</label>
+        <textarea id="Cmen" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+      </div>
+      <button id="cenv-new" onclick="enviarFormulario()">
+        <i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE
+      </button>
+      <div class="msg-success" id="msgSuccess">
+        ✅ ¡Mensaje enviado con éxito! Te contactaremos pronto.
+      </div>
+      <div class="msg-error" id="msgError"></div>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <nav id="pie" class="groupA">
+    <img src="Imagenes/LogoF.png" alt="Logo Foot" class="logf">
+    <ul id="dire">
+      <il><img src="Imagenes/icon_dir.png" alt="icon direccion" class="icon">&nbsp; Calle 32C # 78 - 04, Belen Miravalle</il>
+      <br>
+      <il><img src="Imagenes/icon_tel.png" alt="icon telefono" class="icon">&nbsp; &#40;4&#41; 3877310 / 311 532 0189</il>
+      <br>
+      <il><img src="Imagenes/icon_mail.png" alt="icon mail" class="icon">&nbsp; Fenixcorte@gmail.com</il>
+    </ul>
+    <ul id="enlaceB">
+      <il><a href="Index.html">Inicio</a></il>
+      <il><a href="Servicios.html">Servicios</a></il>
+      <il><a href="Nosotros.html">Quienes Somos</a></il>
+      <il><a href="Contacto.html">Contacto</a></il>
+    </ul>
+  </nav>
+  <div id="base" class="groupA">
+    <div class="FB">
+      <div class="fb-like" data-href="https://www.facebook.com/Fenixcortemedellin"
+        data-layout="standard" data-action="like" data-colorscheme="dark"
+        data-size="large" data-show-faces="true" data-share="false" data-width="320">
+      </div>
+    </div>
+    <div class="FB">
+      <a href="https://twitter.com/AceroCorte?ref_src=twsrc%5Etfw"
+        class="twitter-follow-button" data-lang="es" data-dnt="true" data-show-count="false">
+        Follow Fenix corte acero
+      </a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <p id="derechos">Todos los derechos reservados &copy; Fenix Corte Acero</p>
+    <p class="cr"><img src="Imagenes/Copyr.png" alt="Desing Cuervo"></p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     EMAILJS - CONFIGURACION
+     1. Ve a https://www.emailjs.com y crea una cuenta gratuita
+     2. Conecta tu Gmail en "Email Services" y copia el Service ID
+     3. Crea una plantilla en "Email Templates" con las variables:
+          {{from_email}}, {{phone}}, {{message}}
+        y copia el Template ID
+     4. Ve a "Account" y copia tu Public Key
+     5. Reemplaza los 3 valores de abajo y listo!
+============================================================ -->
+<script>
+  // ↓↓↓ REEMPLAZA ESTOS 3 VALORES CON LOS TUYOS DE EMAILJS ↓↓↓
+  var EMAILJS_PUBLIC_KEY  = "TU_PUBLIC_KEY";
+  var EMAILJS_SERVICE_ID  = "TU_SERVICE_ID";
+  var EMAILJS_TEMPLATE_ID = "TU_TEMPLATE_ID";
+  // ↑↑↑ --------------------------------------------------- ↑↑↑
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  function enviarFormulario() {
+    var correo  = document.getElementById('ccorreo').value.trim();
+    var telefono = document.getElementById('ctel').value.trim();
+    var mensaje = document.getElementById('Cmen').value.trim();
+    var btn     = document.getElementById('cenv-new');
+    var success = document.getElementById('msgSuccess');
+    var error   = document.getElementById('msgError');
+
+    success.style.display = 'none';
+    error.style.display   = 'none';
+
+    // Validaciones
+    if (!correo || !mensaje) {
+      error.textContent = '❌ Por favor completa el correo y el mensaje.';
+      error.style.display = 'block';
+      return;
+    }
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+      error.textContent = '❌ El correo ingresado no es válido.';
+      error.style.display = 'block';
+      return;
+    }
+    if (mensaje.length < 5) {
+      error.textContent = '❌ El mensaje es demasiado corto.';
+      error.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;ENVIANDO...';
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_email : correo,
+      phone      : telefono || 'No proporcionado',
+      message    : mensaje
+    }).then(function() {
+      success.style.display = 'block';
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE';
+      btn.disabled  = false;
+      document.getElementById('ccorreo').value = '';
+      document.getElementById('ctel').value    = '';
+      document.getElementById('Cmen').value    = '';
+    }, function(err) {
+      error.textContent = '❌ Error al enviar el mensaje. Verifica tu configuración de EmailJS.';
+      error.style.display = 'block';
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE';
+      btn.disabled  = false;
+      console.error('EmailJS error:', err);
+    });
+  }
+</script>
+
 </body>
 </html>
