@@ -10,14 +10,10 @@
   <link href="Sliders.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
   <link rel="icon" href="Imagenes/Icon_log.png">
-  <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     #contacto-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      padding: 30px 20px;
+      display: flex; flex-wrap: wrap; gap: 30px; padding: 30px 20px;
     }
     .contacto-info, .contacto-form { flex: 1; min-width: 240px; }
     .info-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 1.1rem; }
@@ -32,6 +28,8 @@
     .social-links a:hover { background: #E53338; color: #fff; }
     .form-group { margin-bottom: 14px; }
     .form-group label { display: block; font-size: 1rem; margin-bottom: 4px; font-weight: 600; }
+    /* Honeypot - invisible para humanos */
+    #campo-honeypot { display: none !important; }
     .msg-success {
       display: none; background: #d4edda; border: 1px solid #28a745;
       color: #155724; padding: 12px; border-radius: 4px;
@@ -40,6 +38,11 @@
     .msg-error {
       display: none; background: #f8d7da; border: 1px solid #E53338;
       color: #721c24; padding: 12px; border-radius: 4px;
+      text-align: center; margin-top: 12px; font-size: 1rem;
+    }
+    .msg-warning {
+      display: none; background: #fff3cd; border: 1px solid #ffc107;
+      color: #856404; padding: 12px; border-radius: 4px;
       text-align: center; margin-top: 12px; font-size: 1rem;
     }
     #cenv-emailjs {
@@ -100,7 +103,13 @@
         <a href="https://twitter.com/AceroCorte" target="_blank"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
+
     <div class="contacto-form">
+      <!-- HONEYPOT: campo invisible, si se llena es un bot -->
+      <div id="campo-honeypot">
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
       <div class="form-group">
         <label class="indtxt2">Dirección e-mail *</label>
         <input type="email" id="ccorreo" placeholder="tucorreo@ejemplo.com">
@@ -117,7 +126,8 @@
         <i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE
       </button>
       <div class="msg-success" id="msgSuccess">✅ ¡Mensaje enviado con éxito! Te contactaremos pronto.</div>
-      <div class="msg-error" id="msgError"></div>
+      <div class="msg-error"   id="msgError"></div>
+      <div class="msg-warning" id="msgWarning"></div>
     </div>
   </div>
 </article>
@@ -143,23 +153,73 @@
 </footer>
 
 <script>
+  // ─── CONFIGURACION EMAILJS ───────────────────────────────
   var EMAILJS_PUBLIC_KEY  = "Mpae0gJ9_ZL4Ax8KU";
   var EMAILJS_SERVICE_ID  = "service_azi6ur5";
   var EMAILJS_TEMPLATE_ID = "template_1qm0zh5";
-
   emailjs.init(EMAILJS_PUBLIC_KEY);
 
+  // ─── PROTECCION 1: Tiempo mínimo de llenado (3 segundos) ─
+  var tiempoInicio = Date.now();
+
+  // ─── PROTECCION 2: Límite de envíos (3 por hora) ─────────
+  var LIMITE_ENVIOS = 3;
+  var VENTANA_MS    = 60 * 60 * 1000; // 1 hora en milisegundos
+
+  function obtenerEnvios() {
+    try {
+      var data = JSON.parse(sessionStorage.getItem('fenix_envios') || '[]');
+      var ahora = Date.now();
+      // Filtrar solo los envíos de la última hora
+      return data.filter(function(t) { return ahora - t < VENTANA_MS; });
+    } catch(e) { return []; }
+  }
+
+  function registrarEnvio() {
+    var envios = obtenerEnvios();
+    envios.push(Date.now());
+    sessionStorage.setItem('fenix_envios', JSON.stringify(envios));
+  }
+
+  function enviosRestantes() {
+    return LIMITE_ENVIOS - obtenerEnvios().length;
+  }
+
+  // ─── FUNCION PRINCIPAL ────────────────────────────────────
   function enviarFormulario() {
     var correo   = document.getElementById('ccorreo').value.trim();
     var telefono = document.getElementById('ctel').value.trim();
     var mensaje  = document.getElementById('Cmen').value.trim();
+    var honeypot = document.getElementById('website').value;
     var btn      = document.getElementById('cenv-emailjs');
     var success  = document.getElementById('msgSuccess');
     var error    = document.getElementById('msgError');
+    var warning  = document.getElementById('msgWarning');
 
     success.style.display = 'none';
     error.style.display   = 'none';
+    warning.style.display = 'none';
 
+    // PROTECCION 1: Honeypot — si el campo oculto tiene valor, es un bot
+    if (honeypot) {
+      console.warn('Bot detectado por honeypot.');
+      return;
+    }
+
+    // PROTECCION 2: Tiempo mínimo — menos de 3 segundos = bot
+    if (Date.now() - tiempoInicio < 3000) {
+      console.warn('Bot detectado por velocidad de llenado.');
+      return;
+    }
+
+    // PROTECCION 3: Límite de envíos por hora
+    if (enviosRestantes() <= 0) {
+      warning.textContent = '⚠️ Has alcanzado el límite de mensajes por hora. Intenta más tarde o llámanos directamente.';
+      warning.style.display = 'block';
+      return;
+    }
+
+    // Validaciones normales
     if (!correo || !mensaje) {
       error.textContent = '❌ Por favor completa el correo y el mensaje.';
       error.style.display = 'block'; return;
@@ -181,14 +241,17 @@
       phone      : telefono || 'No proporcionado',
       message    : mensaje
     }).then(function() {
+      registrarEnvio();
       success.style.display = 'block';
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE';
       btn.disabled  = false;
       document.getElementById('ccorreo').value = '';
       document.getElementById('ctel').value    = '';
       document.getElementById('Cmen').value    = '';
+      // Resetear temporizador
+      tiempoInicio = Date.now();
     }, function(err) {
-      error.textContent = '❌ Error al enviar. Verifica tu configuración de EmailJS.';
+      error.textContent = '❌ Error al enviar. Por favor inténtalo de nuevo.';
       error.style.display = 'block';
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;ENVIAR MENSAJE';
       btn.disabled  = false;
