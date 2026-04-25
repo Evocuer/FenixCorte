@@ -9,7 +9,7 @@
   <link href="FCA1.css" rel="stylesheet" type="text/css">
   <link href="Sliders.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-  <link rel="icon" href="Imagenes/Icon_log.png">
+  <link rel="icon" href="Fenix Corte Acero/Imagenes/Icon_log.png">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     #contacto-wrapper {
@@ -28,7 +28,6 @@
     .social-links a:hover { background: #E53338; color: #fff; }
     .form-group { margin-bottom: 14px; }
     .form-group label { display: block; font-size: 1rem; margin-bottom: 4px; font-weight: 600; }
-    /* Honeypot - invisible para humanos */
     #campo-honeypot { display: none !important; }
     .msg-success {
       display: none; background: #d4edda; border: 1px solid #28a745;
@@ -60,7 +59,7 @@
 <header>
   <a href="Index.html">
     <div id="head" class="groupA">
-      <img src="Imagenes/LogoH.png" alt="Logo Head" class="logh">
+      <img src="Fenix Corte Acero/Imagenes/LogoH.png" alt="Logo Head" class="logh">
     </div>
   </a>
   <nav id="enlaceA" class="groupA">
@@ -105,11 +104,9 @@
     </div>
 
     <div class="contacto-form">
-      <!-- HONEYPOT: campo invisible, si se llena es un bot -->
       <div id="campo-honeypot">
         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
       </div>
-
       <div class="form-group">
         <label class="indtxt2">Dirección e-mail *</label>
         <input type="email" id="ccorreo" placeholder="tucorreo@ejemplo.com">
@@ -134,11 +131,11 @@
 
 <footer>
   <nav id="pie" class="groupA">
-    <img src="Imagenes/LogoF.png" alt="Logo Foot" class="logf">
+    <img src="Fenix Corte Acero/Imagenes/LogoF.png" alt="Logo Foot" class="logf">
     <ul id="dire">
-      <il><img src="Imagenes/icon_dir.png" alt="icon direccion" class="icon">&nbsp; Calle 32C # 78 - 04, Belen Miravalle</il><br>
-      <il><img src="Imagenes/icon_tel.png" alt="icon telefono" class="icon">&nbsp; &#40;4&#41; 3877310 / 311 532 0189</il><br>
-      <il><img src="Imagenes/icon_mail.png" alt="icon mail" class="icon">&nbsp; Fenixcorte@gmail.com</il>
+      <il><img src="Fenix Corte Acero/Imagenes/icon_dir.png" alt="icon direccion" class="icon">&nbsp; Calle 32C # 78 - 04, Belen Miravalle</il><br>
+      <il><img src="Fenix Corte Acero/Imagenes/icon_tel.png" alt="icon telefono" class="icon">&nbsp; &#40;4&#41; 3877310 / 311 532 0189</il><br>
+      <il><img src="Fenix Corte Acero/Imagenes/icon_mail.png" alt="icon mail" class="icon">&nbsp; Fenixcorte@gmail.com</il>
     </ul>
     <ul id="enlaceB">
       <il><a href="Index.html">Inicio</a></il>
@@ -149,28 +146,24 @@
   </nav>
   <div id="base" class="groupA">
     <p id="derechos">Todos los derechos reservados &copy; Fenix Corte Acero</p>
+    <p class="cr"><img src="Fenix Corte Acero/Imagenes/Copyr.png" alt="Desing Cuervo"></p>
   </div>
 </footer>
 
 <script>
-  // ─── CONFIGURACION EMAILJS ───────────────────────────────
   var EMAILJS_PUBLIC_KEY  = "Mpae0gJ9_ZL4Ax8KU";
   var EMAILJS_SERVICE_ID  = "service_azi6ur5";
   var EMAILJS_TEMPLATE_ID = "template_1qm0zh5";
   emailjs.init(EMAILJS_PUBLIC_KEY);
 
-  // ─── PROTECCION 1: Tiempo mínimo de llenado (3 segundos) ─
   var tiempoInicio = Date.now();
-
-  // ─── PROTECCION 2: Límite de envíos (3 por hora) ─────────
   var LIMITE_ENVIOS = 3;
-  var VENTANA_MS    = 60 * 60 * 1000; // 1 hora en milisegundos
+  var VENTANA_MS    = 60 * 60 * 1000;
 
   function obtenerEnvios() {
     try {
       var data = JSON.parse(sessionStorage.getItem('fenix_envios') || '[]');
       var ahora = Date.now();
-      // Filtrar solo los envíos de la última hora
       return data.filter(function(t) { return ahora - t < VENTANA_MS; });
     } catch(e) { return []; }
   }
@@ -185,7 +178,6 @@
     return LIMITE_ENVIOS - obtenerEnvios().length;
   }
 
-  // ─── FUNCION PRINCIPAL ────────────────────────────────────
   function enviarFormulario() {
     var correo   = document.getElementById('ccorreo').value.trim();
     var telefono = document.getElementById('ctel').value.trim();
@@ -200,26 +192,14 @@
     error.style.display   = 'none';
     warning.style.display = 'none';
 
-    // PROTECCION 1: Honeypot — si el campo oculto tiene valor, es un bot
-    if (honeypot) {
-      console.warn('Bot detectado por honeypot.');
-      return;
-    }
+    if (honeypot) { console.warn('Bot detectado por honeypot.'); return; }
+    if (Date.now() - tiempoInicio < 3000) { console.warn('Bot detectado por velocidad.'); return; }
 
-    // PROTECCION 2: Tiempo mínimo — menos de 3 segundos = bot
-    if (Date.now() - tiempoInicio < 3000) {
-      console.warn('Bot detectado por velocidad de llenado.');
-      return;
-    }
-
-    // PROTECCION 3: Límite de envíos por hora
     if (enviosRestantes() <= 0) {
       warning.textContent = '⚠️ Has alcanzado el límite de mensajes por hora. Intenta más tarde o llámanos directamente.';
-      warning.style.display = 'block';
-      return;
+      warning.style.display = 'block'; return;
     }
 
-    // Validaciones normales
     if (!correo || !mensaje) {
       error.textContent = '❌ Por favor completa el correo y el mensaje.';
       error.style.display = 'block'; return;
@@ -248,7 +228,6 @@
       document.getElementById('ccorreo').value = '';
       document.getElementById('ctel').value    = '';
       document.getElementById('Cmen').value    = '';
-      // Resetear temporizador
       tiempoInicio = Date.now();
     }, function(err) {
       error.textContent = '❌ Error al enviar. Por favor inténtalo de nuevo.';
